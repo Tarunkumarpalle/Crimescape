@@ -141,24 +141,37 @@
           option.style.display = "none";
         }
       }
+      document.activeElement.blur();
     }
+   
+      document.getElementById("closePopupBtn").addEventListener("click", function() {
+          document.getElementById("datetimePicker").blur(); // Close the date time picker pop-up
+      });
+  
+      // Close the date time picker pop-up when the "Today" button is clicked
+      document.getElementById("datetimePicker").addEventListener("input", function() {
+          if (this.value === "") {
+              this.blur(); // Close the date time picker pop-up
+          }
+      });
+  
     </script>
 <div class="container p-8" style="margin-top: 50px; width: 100%;">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                 <div class="card-header" style="color: #ffffff; background-color: #0f054c; border-bottom: 1px solid #ccc; padding: 10px;">
-                    <h3 class="card-title" style="margin: 0;">Crime Prediction</h3>
+                    <h3 class="card-title" style="margin: 0;">Crime Prediction </h3>
                 </div>
                 <form method="post" action="{% url 'home:predict' %}" enctype="multipart/form-data" style="max-width: 100%; margin: 0 auto;">
                     {% csrf_token %}
                     <br>
-                        <div class="col-md-12">
+                        <div class="col-md-12" >
                     
                                                 <div class="form-group">
                                                         <div align="center">
                                                           
-                                                          <select id="location" name="location" >
+                                                          <select id="location" name="location" style="width:80%;">
                                                             <option value="City Bus Stop-Near Samrat Hotel, Mahatma Gandhi Marg, Indore City, Indore">City Bus Stop-Near Samrat Hotel, Mahatma Gandhi Marg, Indore City, Indore</option>
                                                             <option value="Aastha Hospital, Old A. B. Road, Indore City, Indore">Aastha Hospital, Old A. B. Road, Indore City, Indore</option>
                                                             <option value="MR10, Bhichaulihapsi, Indore">MR10, Bhichaulihapsi, Indore</option>
@@ -219,7 +232,8 @@
                                                           <br>
                                                         </br>
                                                           
-                                                                    <input type="datetime-local" class="form-control" name="timestamp" step="1" style="width:250px;"><br>
+                                                                    <input type="datetime-local" class="form-control" name="timestamp" step="1" style="width:250px;">
+                                                                    <br>
                                                                     <input type="submit" value="Predict" class="btn btn-primary" >
                                                                     <input type="reset" value="Reset Data" class="btn btn-primary">
                                                                   
@@ -238,7 +252,9 @@
     </div>
     
 </div>
-
+<div "col-md-12" style="margin-bottom:50px;">
+  <p></p>
+                      </div>
 
 
 {% endblock %}

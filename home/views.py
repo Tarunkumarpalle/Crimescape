@@ -40,11 +40,12 @@ def predict(request):
         data['timestamp'] = pd.to_datetime(data['timestamp'], format = '%d/%m/%Y %H:%M:%S')
         column_1 = data.loc[:,data.columns[0]]
         DT=pd.DataFrame({
+              
               "month": column_1.dt.month,
               "day": column_1.dt.day,
               "hour": column_1.dt.hour,
               "dayofyear": column_1.dt.dayofyear,
-              "week": column_1.dt.week,
+              "week": column_1.dt.isocalendar().week,
               "weekofyear": column_1.dt.weekofyear,
              })
         data=data.drop('timestamp',axis=1)
@@ -175,7 +176,7 @@ def plot_bar_districtyear_chart(target_district):
     plt.savefig(image_stream, format='png')
     plt.close()
     image_base64 = base64.b64encode(image_stream.getvalue()).decode('utf-8')
-    img_tag = f'<img width="1000px" src="data:image/png;base64,{image_base64}" />'
+    img_tag = f'<img width="60%" src="data:image/png;base64,{image_base64}" />'
     return img_tag 
 
     
